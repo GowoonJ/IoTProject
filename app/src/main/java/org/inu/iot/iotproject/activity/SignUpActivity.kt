@@ -1,8 +1,8 @@
 package org.inu.iot.iotproject.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import org.inu.iot.iotproject.R
 
@@ -11,19 +11,27 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        btn_sign_in.setOnClickListener {
-            val intentCamera = Intent(this, MainActivity::class.java)
-            intentCamera.putExtra("SIGN_STATUS", 1);
+        var name = ""
+        var email = ""
+        var passwd = ""
+
+
+        btn_ok.setOnClickListener {
+            name = editText_Name.text.toString()
+            email = editText_Email.toString()
+            passwd = editText_passwd.toString()
+
+//            if(!name.equals("") && (!Email.equals("")||Email.length==11)){
+//                val intentCamera = Intent(this, CameraActivity::class.java)
+//                this.startActivity(intentCamera)
+//                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
+//            }
+
+            val intentCamera = Intent(this, SignUpActivity::class.java)
+            intentCamera.putExtra("SIGN_STATUS", 2);
             this.startActivity(intentCamera)
             overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
             this.finish()
-        }
-
-        btn_sign_up.setOnClickListener {
-            val intentInfo = Intent(this, SignUpActivity::class.java)
-//            intentInfo.putExtra("SIGN_UP", 2);
-            this.startActivity(intentInfo)
-            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
         }
     }
 }
