@@ -132,3 +132,5 @@ fabric.properties
 ### AndroidStudio Patch ###
 
 !/gradle/wrapper/gradle-wrapper.jar
+
+app/src/main/java/org/inu/iot/iotproject/util/Config.kt
