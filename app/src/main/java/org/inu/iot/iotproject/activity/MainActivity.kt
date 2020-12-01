@@ -2,6 +2,7 @@ package org.inu.iot.iotproject.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
@@ -24,11 +25,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var adapterRecyclerSanitizer : AdapterRecyclerSanitizer = AdapterRecyclerSanitizer()
+//        val userToken = intent.extras!!.getString("userToken", "")
+
+        val adapterRecyclerSanitizer : AdapterRecyclerSanitizer = AdapterRecyclerSanitizer()
 
         recyclerView.layoutManager = GridLayoutManager(applicationContext, 2)
 
-        Retrofits.getService().getSterilizers("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwicm9sZXMiOlsiUk9MRV9NRU1CRVIiXSwiaWF0IjoxNjA2NzkyODc2LCJleHAiOjE2MDY3OTY0NzZ9.e94pz--Y5TiJuRXiPWbQGbj_HaDC3Zyq9zQ6uuxwrFg")
+        Retrofits.getService().getSterilizers("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiUk9MRV9NRU1CRVIiXSwiaWF0IjoxNjA2Nzk4Njc1LCJleHAiOjE2MDY4MDIyNzV9.8jBscgoSfTSOqm0wmUN4U0koRvKuiRePkfhzDpLdSLQ")
             .enqueue( object : Callback<sterilizersList> {
                 override fun onFailure(call: Call<sterilizersList>, t: Throwable) {
                     Toast.makeText(applicationContext, "서버연결을 확인해주세요!", Toast.LENGTH_LONG).show()
@@ -39,22 +42,26 @@ class MainActivity : AppCompatActivity() {
                     response: Response<sterilizersList>
                 ) {
                     if (response.isSuccessful){
+                        Log.d("success state", response.code().toString() + response.body()?.data)
                         Toast.makeText(applicationContext, "리스트를 가져옵니다.", Toast.LENGTH_LONG).show()
                         sList = response.body()!!.data
                         enableListCount = sList.size
+
+                        if(enableListCount == 0 ){
+                            recyclerView.visibility = View.INVISIBLE
+                            tvEmptyValue.visibility = View.VISIBLE
+                        }
+                        else{
+                            recyclerView.visibility = View.VISIBLE
+                            tvEmptyValue.visibility = View.INVISIBLE
+
+                            adapterRecyclerSanitizer.setDataList(sList)
+                            recyclerView.adapter = adapterRecyclerSanitizer
+                        }
                     }
                 }
             })
-        adapterRecyclerSanitizer.dataList = this.sList
-        recyclerView.adapter = adapterRecyclerSanitizer
 
-        if(enableListCount == 0 ){
-            recyclerView.visibility = View.INVISIBLE
-            tvEmptyValue.visibility = View.VISIBLE
-        }
-        else{
-            recyclerView.visibility = View.VISIBLE
-            tvEmptyValue.visibility = View.INVISIBLE
-        }
+
     }
 }

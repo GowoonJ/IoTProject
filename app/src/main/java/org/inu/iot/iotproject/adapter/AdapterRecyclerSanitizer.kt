@@ -10,7 +10,12 @@ import org.inu.iot.iotproject.R
 import org.inu.iot.iotproject.model.SanitizerDataModel
 
 class AdapterRecyclerSanitizer : RecyclerView.Adapter<AdapterRecyclerSanitizer.ViewHolder>() {
-    lateinit var dataList : ArrayList<SanitizerDataModel>
+    private var dataList : ArrayList<SanitizerDataModel> = ArrayList()
+
+    fun setDataList(dataSet : ArrayList<SanitizerDataModel>){
+        this.dataList = dataSet
+        notifyDataSetChanged()
+    }
 
     fun setOnItemClickListener(listener: OnItemClickListener?) {
         mListener = listener
@@ -42,20 +47,26 @@ class AdapterRecyclerSanitizer : RecyclerView.Adapter<AdapterRecyclerSanitizer.V
 
         holder.tvName.text = data.id.toString()
         holder.tvCapaticy.text = data.capaticy.toString()
+        if (data.runStatus == "RUN")
+            holder.tvRunable.text = "사용 중"
+        else
+            holder.tvRunable.text = "미사용"
     }
 
     class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var tvName: TextView
         var tvLocation: TextView
-        var tvLocationDetail: TextView
+        var tvRunable: TextView
         var tvCapaticy: TextView
 
         init {
             tvName = itemView.findViewById(R.id.tv_name)
             tvLocation = itemView.findViewById(R.id.tv_location)
-            tvLocationDetail = itemView.findViewById(R.id.tv_location_detail)
+            tvRunable = itemView.findViewById(R.id.tv_runable)
             tvCapaticy = itemView.findViewById(R.id.tv_capacity)
         }
     }
+
+
 }

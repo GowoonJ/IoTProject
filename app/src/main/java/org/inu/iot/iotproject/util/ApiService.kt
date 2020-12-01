@@ -9,16 +9,20 @@ import retrofit2.http.*
 
 interface ApiService {
 
+    @Headers("Content-Type: application/json")
     @FormUrlEncoded
     @POST("member/signup")
     abstract fun signUp(
+//        @Header("Content-Type") header1 : String,
         @Field("email") email: String,
         @Field("name") name: String,
         @Field("password") password: String): Call<JsonObject>
 
+    @Headers("Content-Type: application/json")
     @FormUrlEncoded
     @POST("member/signin")
     abstract fun signIn(
+//        @Header("Content-Type") header1 : String,
         @Field("email") email: String,
         @Field("password") password: String): Call<SignInResponse>
 

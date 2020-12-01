@@ -36,7 +36,7 @@ class SignInActivity : AppCompatActivity() {
             passwd = editText_passwd.text.toString()
 
             Log.d("signintest", email+passwd)
-            Retrofits.getService().signIn(email, passwd)
+            Retrofits.getService().signIn( email, passwd)
                 .enqueue(object : Callback<SignInResponse> {
                     override fun onFailure(call: Call<SignInResponse>, t: Throwable) {
                         Toast.makeText(applicationContext, "서버연결을 확인해주세요!", Toast.LENGTH_LONG).show()
@@ -47,13 +47,19 @@ class SignInActivity : AppCompatActivity() {
                         call: Call<SignInResponse>,
                         response: Response<SignInResponse>
                     ) {
-                        if (response.isSuccessful && response.code() == 200){
-                            Toast.makeText(applicationContext, "로그인성공!", Toast.LENGTH_LONG).show()
-                            token.userToken = response.body()!!.data
-                            userToken = response.body()!!.data
+                        if (response.isSuccessful) {
+                            if (response.code() == 200) {
+                                Toast.makeText(applicationContext, "로그인성공!", Toast.LENGTH_LONG)
+                                    .show()
+                                token.userToken = response.body()!!.data
+                                userToken = response.body()!!.data
 
-                            signInSuccess = true
-                            Log.d("success", response.message() + signInSuccess.toString())
+                                signInSuccess = true
+                                Log.d("success", response.message() + signInSuccess.toString())
+                            }
+                            else{
+                                Log.d("response code", response.code().toString())
+                            }
                         }
                     }
                 })
