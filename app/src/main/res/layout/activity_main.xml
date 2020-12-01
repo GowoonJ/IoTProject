@@ -75,4 +75,18 @@
         android:text="등록된 소독제가 없습니다!\n버튼을 클릭해 소독제를 등록해주세요"
         app:layout_constraintTop_toBottomOf="@id/layout_top"
         />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/rounded_square"
+        android:backgroundTint="@color/colorSub"
+        android:clickable="true"
+        android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_add"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

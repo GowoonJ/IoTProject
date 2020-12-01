@@ -26,6 +26,12 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String): Call<SignInResponse>
 
+    @GET("member/{id}")
+    abstract fun getUserInfo(
+        @Header("X-AUTH-TOKEN") userToken : String,
+        @Path("id") id : Long
+    ) : Call<sterilizersList>
+
     @FormUrlEncoded
     @POST("sterilizer")
     abstract fun insertSterilizer(

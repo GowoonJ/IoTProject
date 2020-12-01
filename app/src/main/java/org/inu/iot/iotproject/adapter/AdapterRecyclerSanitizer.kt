@@ -1,5 +1,6 @@
 package org.inu.iot.iotproject.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,11 +43,12 @@ class AdapterRecyclerSanitizer : RecyclerView.Adapter<AdapterRecyclerSanitizer.V
         return dataList.size
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: AdapterRecyclerSanitizer.ViewHolder, position: Int) {
         var data : SanitizerDataModel = dataList[position]
 
         holder.tvName.text = data.id.toString()
-        holder.tvCapaticy.text = data.capaticy.toString()
+        holder.tvCapaticy.text = "잔량 : " + data.capaticy.toString() + "%"
         if (data.runStatus == "RUN")
             holder.tvRunable.text = "사용 중"
         else

@@ -1,5 +1,7 @@
 package org.inu.iot.iotproject.activity
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -21,17 +23,48 @@ class MainActivity : AppCompatActivity() {
     var sList : ArrayList<SanitizerDataModel> = ArrayList<SanitizerDataModel>()
     var enableListCount = 0
 
+    private val userToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiUk9MRV9NRU1CRVIiXSwiaWF0IjoxNjA2Nzk4Njc1LCJleHAiOjE2MDY4MDIyNzV9.8jBscgoSfTSOqm0wmUN4U0koRvKuiRePkfhzDpLdSLQ"
+    val userID = "juwom0831@naver.com"
+
+    val adapterRecyclerSanitizer : AdapterRecyclerSanitizer = AdapterRecyclerSanitizer()
+
+    var dataLoaded = true
+
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        val userToken = intent.extras!!.getString("userToken", "")
+//        userToken = intent.extras!!.getString("userToken", "")
 
-        val adapterRecyclerSanitizer : AdapterRecyclerSanitizer = AdapterRecyclerSanitizer()
+
+        textViewName.text = userID+"님"
 
         recyclerView.layoutManager = GridLayoutManager(applicationContext, 2)
 
-        Retrofits.getService().getSterilizers("eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiUk9MRV9NRU1CRVIiXSwiaWF0IjoxNjA2Nzk4Njc1LCJleHAiOjE2MDY4MDIyNzV9.8jBscgoSfTSOqm0wmUN4U0koRvKuiRePkfhzDpLdSLQ")
+        floatingActionButton.setOnClickListener {
+            dataLoaded = false
+            val intentAdd = Intent(this, AddActivity::class.java)
+            intentAdd.putExtra("userToken", userToken)
+//            intentAdd.putExtra("userID", email)
+            this.startActivity(intentAdd)
+            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
+        }
+
+        if(dataLoaded){
+            connection()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+//        if(!dataLoaded){
+//            connection()
+//        }
+    }
+
+    private fun connection(){
+        Retrofits.getService().getSterilizers(userToken)
             .enqueue( object : Callback<sterilizersList> {
                 override fun onFailure(call: Call<sterilizersList>, t: Throwable) {
                     Toast.makeText(applicationContext, "서버연결을 확인해주세요!", Toast.LENGTH_LONG).show()
@@ -43,9 +76,10 @@ class MainActivity : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful){
                         Log.d("success state", response.code().toString() + response.body()?.data)
-                        Toast.makeText(applicationContext, "리스트를 가져옵니다.", Toast.LENGTH_LONG).show()
+//                        Toast.makeText(applicationContext, "리스트를 가져옵니다.", Toast.LENGTH_LONG).show()
                         sList = response.body()!!.data
                         enableListCount = sList.size
+                        adapterRecyclerSanitizer.setDataList(sList)
 
                         if(enableListCount == 0 ){
                             recyclerView.visibility = View.INVISIBLE
@@ -54,14 +88,14 @@ class MainActivity : AppCompatActivity() {
                         else{
                             recyclerView.visibility = View.VISIBLE
                             tvEmptyValue.visibility = View.INVISIBLE
-
-                            adapterRecyclerSanitizer.setDataList(sList)
-                            recyclerView.adapter = adapterRecyclerSanitizer
                         }
+                        recyclerView.adapter = adapterRecyclerSanitizer
                     }
                 }
             })
+    }
 
-
+    private fun connectUser(){
+        Retrofits.getService()
     }
 }
