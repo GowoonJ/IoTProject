@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        userToken = intent.extras!!.getString("userToken", "")
-//        userID = intent.extras!!.getString("userID", "")
+        userToken = intent.extras!!.getString("userToken", "")
+        userID = intent.extras!!.getString("userID", "")
 
         textViewName.text = userID+"님"
 

@@ -20,11 +20,11 @@ interface ApiService {
         @Field("name") name: String,
         @Field("password") password: String): Call<JsonObject>
 
-//    @Headers("Content-Type: application/json; charset=UTF-8")
-    @Headers("Content-Type: application/x-www-form-urlencoded")
+    @Headers("Content-Type: application/json; charset=UTF-8")
+//    @Headers("Content-Type: application/x-www-form-urlencoded")
     @POST("member/signin")
     abstract fun signIn(
-        @Body body : JSONObject): Call<SignInResponse>
+        @Body body : JsonObject): Call<SignInResponse>
 
     @GET("member/{id}")
     abstract fun getUserInfo(

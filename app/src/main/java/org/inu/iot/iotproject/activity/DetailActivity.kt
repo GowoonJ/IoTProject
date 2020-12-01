@@ -44,10 +44,15 @@ class DetailActivity : AppCompatActivity() {
                         if (response.code() == 200){
                             dataDetailModel = response.body()!!
                             sanitizerData = dataDetailModel.data
+                            dataSetView()
                             Log.d("getDetailData", sanitizerData.serialNumber + sanitizerData.address.position)
                         }
                     }
                 }
             })
+    }
+
+    private fun dataSetView(){
+
     }
 }

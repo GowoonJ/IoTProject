@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import kotlinx.android.synthetic.main.activity_sign_up.editText_Email
 import kotlinx.android.synthetic.main.activity_sign_up.editText_passwd
@@ -33,9 +34,9 @@ class SignInActivity : AppCompatActivity() {
             email = editText_Email.text.toString()
             passwd = editText_passwd.text.toString()
 
-            val paramObject = JSONObject()
-            paramObject.put("email", email)
-            paramObject.put("password", passwd)
+            val paramObject = JsonObject()
+            paramObject.addProperty("email", email)
+            paramObject.addProperty("password", passwd)
 
 //            Log.d("signin test", paramObject.toString())
 //            Retrofits.getService().signIn(paramObject)
@@ -56,6 +57,15 @@ class SignInActivity : AppCompatActivity() {
 
                                 signInSuccess = true
                                 Log.d("success", response.message() + signInSuccess.toString())
+
+                                if(signInSuccess){
+                                    val intentMain = Intent(applicationContext, MainActivity::class.java)
+                                    intentMain.putExtra("userToken", userToken)
+                                    intentMain.putExtra("userID", email)
+                                    startActivity(intentMain)
+                                    overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
+                                    finish()
+                                }
                             }
                             else{
                                 Log.d("response code", response.code().toString())
@@ -65,15 +75,6 @@ class SignInActivity : AppCompatActivity() {
                         Log.d("response code 500", response.code().toString())
                     }
                 })
-
-            if(signInSuccess){
-                val intentMain = Intent(this, MainActivity::class.java)
-                intentMain.putExtra("userToken", userToken)
-                intentMain.putExtra("userID", email)
-                this.startActivity(intentMain)
-                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
-                this.finish()
-            }
         }
     }
 }
