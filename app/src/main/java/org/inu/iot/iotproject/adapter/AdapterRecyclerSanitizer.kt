@@ -7,10 +7,10 @@ import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.inu.iot.iotproject.R
-import org.inu.iot.iotproject.model.sanitizerDataModel
+import org.inu.iot.iotproject.model.SanitizerDataModel
 
 class AdapterRecyclerSanitizer : RecyclerView.Adapter<AdapterRecyclerSanitizer.ViewHolder>() {
-    lateinit var dataList : ArrayList<sanitizerDataModel>
+    lateinit var dataList : ArrayList<SanitizerDataModel>
 
     fun setOnItemClickListener(listener: OnItemClickListener?) {
         mListener = listener
@@ -34,13 +34,14 @@ class AdapterRecyclerSanitizer : RecyclerView.Adapter<AdapterRecyclerSanitizer.V
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return dataList.size
     }
 
     override fun onBindViewHolder(holder: AdapterRecyclerSanitizer.ViewHolder, position: Int) {
-        var data : sanitizerDataModel = dataList[position]
+        var data : SanitizerDataModel = dataList[position]
 
-        holder.tvName.text = ""
+        holder.tvName.text = data.id.toString()
+        holder.tvCapaticy.text = data.capaticy.toString()
     }
 
     class ViewHolder(itemView: View) :

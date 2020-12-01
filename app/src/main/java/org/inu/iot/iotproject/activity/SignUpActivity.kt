@@ -26,8 +26,8 @@ class SignUpActivity : AppCompatActivity() {
 
         btn_sign_up.setOnClickListener {
             name = editText_Name.text.toString()
-            email = editText_Email.toString()
-            passwd = editText_passwd.toString()
+            email = editText_Email.text.toString()
+            passwd = editText_passwd.text.toString()
 
             Retrofits.getService().signUp(email, name, passwd)
                 .enqueue(object : Callback<JsonObject> {

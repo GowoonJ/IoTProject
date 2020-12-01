@@ -12,7 +12,7 @@ class StartActivity : AppCompatActivity() {
         setContentView(R.layout.activity_start)
 
         btn_sign_in.setOnClickListener {
-            val intentCamera = Intent(this, MainActivity::class.java)
+            val intentCamera = Intent(this, SignInActivity::class.java)
             intentCamera.putExtra("SIGN_STATUS", 1);
             this.startActivity(intentCamera)
             overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)

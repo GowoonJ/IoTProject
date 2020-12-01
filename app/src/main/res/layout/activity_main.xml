@@ -62,4 +62,17 @@
         tools:listitem="@layout/item_recycler_grid"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_top" />
+
+    <TextView
+        android:id="@+id/tvEmptyValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        android:text="등록된 소독제가 없습니다!\n버튼을 클릭해 소독제를 등록해주세요"
+        app:layout_constraintTop_toBottomOf="@id/layout_top"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
