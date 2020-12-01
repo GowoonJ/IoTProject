@@ -37,6 +37,10 @@ ext{
     retrofitVersion = "2.4.0"
 }
 
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -54,4 +58,6 @@ dependencies {
     // retrofit Library
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

@@ -83,7 +83,7 @@
             <LinearLayout
                 android:id="@+id/linear_condition"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="100dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.2"
@@ -129,13 +129,27 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
-            <View
-                android:id="@+id/view_capacity"
-                android:layout_width="match_parent"
+            <ProgressBar
+                android:id="@+id/progressBar_Capacity"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintHeight_percent="0.262"
-                app:layout_constraintTop_toBottomOf="@+id/tv_location_info"/>
+                android:layout_marginHorizontal="8dp"
+                android:background="@drawable/rounded_rectangle_outline_11dp"
+                android:progressDrawable="@drawable/progressbar_background"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+                app:layout_constraintHeight_percent="0.05"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/tv_location_info" />
+
+            <TextView
+                android:id="@+id/tv_Capacity_left"
+                style="@style/TextTheme15sp"
+                android:layout_marginTop="16dp"
+                android:text="현재 잔여량 : "
+                app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar_Capacity" />
 
             <TextView
                 android:id="@+id/tv_totalCapacity"
@@ -143,7 +157,7 @@
                 android:layout_marginTop="16dp"
                 android:text="총량 : 500ml  현재 : 230ml"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@+id/view_capacity" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_Capacity_left" />
 
             <View
                 android:id="@+id/divider4"
@@ -162,56 +176,31 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
-            <TextView
-                android:id="@+id/tv_history1"
-                style="@style/TextTheme15sp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview_history"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:lineSpacingExtra="8sp"
-                android:text="2020.12.01"
+                tools:listitem="@layout/item_recycler_history"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/guideline_right"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@+id/content" />
 
-            <TextView
-                android:id="@+id/tv_history2"
-                style="@style/TextTheme15sp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:lineSpacingExtra="8sp"
-                android:text="2020.12.01"
-                app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/tv_history1" />
-
-
-            <TextView
-                android:id="@+id/tv_history3"
-                style="@style/TextTheme15sp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:lineSpacingExtra="8sp"
-                android:text="2020.12.01"
-                app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/tv_history2" />
-
-            <TextView
-                android:id="@+id/tv_history4"
-                style="@style/TextTheme15sp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:lineSpacingExtra="8sp"
-                android:text="2020.12.01"
-                app:layout_constraintEnd_toEndOf="@id/guideline_right"
-                app:layout_constraintStart_toStartOf="@+id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/tv_history3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
+    <Button
+        android:id="@+id/btn_select_usedHistory"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginBottom="24dp"
+        android:text="일자별 사용량 보기"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:backgroundTint="@color/colorMain"
+        android:background="@drawable/rounded_rectangle_outline_11dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             dataLoaded = false
             val intentAdd = Intent(this, AddActivity::class.java)
             intentAdd.putExtra("userToken", userToken)
-//            intentAdd.putExtra("userID", email)
+            intentAdd.putExtra("userID", userID)
             this.startActivity(intentAdd)
             overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
         }

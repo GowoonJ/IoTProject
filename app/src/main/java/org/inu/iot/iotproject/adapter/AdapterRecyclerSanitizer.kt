@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import org.inu.iot.iotproject.R
@@ -51,6 +52,8 @@ class AdapterRecyclerSanitizer : RecyclerView.Adapter<AdapterRecyclerSanitizer.V
     override fun onBindViewHolder(holder: AdapterRecyclerSanitizer.ViewHolder, position: Int) {
         var data : SanitizerDataModel = dataList[position]
 
+        holder.progressBar.progress = data.capaticy
+
         holder.tvName.text = data.id.toString()
         holder.tvCapaticy.text = "잔량 : " + data.capaticy.toString() + "%"
         if (data.runStatus == "RUN")
@@ -69,12 +72,14 @@ class AdapterRecyclerSanitizer : RecyclerView.Adapter<AdapterRecyclerSanitizer.V
         var tvLocation: TextView
         var tvRunable: TextView
         var tvCapaticy: TextView
+        var progressBar : ProgressBar
 
         init {
             tvName = itemView.findViewById(R.id.tv_name)
             tvLocation = itemView.findViewById(R.id.tv_location)
             tvRunable = itemView.findViewById(R.id.tv_runable)
             tvCapaticy = itemView.findViewById(R.id.tv_capacity)
+            progressBar = itemView.findViewById(R.id.progressBar)
         }
     }
 }

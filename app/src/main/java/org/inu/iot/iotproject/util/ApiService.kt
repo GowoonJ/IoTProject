@@ -2,10 +2,7 @@ package org.inu.iot.iotproject.util
 
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
-import org.inu.iot.iotproject.model.SanitizerDetailModel
-import org.inu.iot.iotproject.model.SignInResponse
-import org.inu.iot.iotproject.model.UserRequest
-import org.inu.iot.iotproject.model.sterilizersList
+import org.inu.iot.iotproject.model.*
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.*
@@ -28,11 +25,11 @@ interface ApiService {
         @Path("id") id : Long
     ) : Call<sterilizersList>
 
-    @Headers("Content-Type: application/json; charset=UTF-8")
+//    @Headers("Content-Type: application/json; charset=UTF-8")
     @POST("sterilizer")
     abstract fun insertSterilizer(
         @Header("X-AUTH-TOKEN") userToken : String,
-        @Body body : JsonObject): Call<JsonObject>
+        @Body body : JsonObject): Call<ResponseInsertItem>
 
     @DELETE("sterilizer/{sterilizerId}")
     abstract fun deleteSterilizer(
@@ -49,4 +46,15 @@ interface ApiService {
     abstract fun getSterilizer(
         @Header("X-AUTH-TOKEN") userToken : String,
         @Path("sterilizerId") sterilizerId : Long) : Call<SanitizerDetailModel>
+
+    @GET("useHistory")
+    abstract fun getUsedHistory(
+        @Header("X-AUTH-TOKEN") userToken : String,
+        @Query("sterilizerId") sterilizerId : Long) : Call<UseHistoryModel>
+
+    @GET("changeHistory")
+    abstract fun getChangedHistory(
+        @Header("X-AUTH-TOKEN") userToken : String,
+        @Query("sterilizerId") sterilizerId : Long) : Call<changeHistory>
+
 }
