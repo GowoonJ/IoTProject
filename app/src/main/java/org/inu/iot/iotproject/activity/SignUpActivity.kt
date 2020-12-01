@@ -30,7 +30,12 @@ class SignUpActivity : AppCompatActivity() {
             email = editText_Email.text.toString()
             passwd = editText_passwd.text.toString()
 
-            Retrofits.getService().signUp("application/json; charset=UTF-8",email, name, passwd)
+            val paramObject = JsonObject()
+            paramObject.addProperty("name", name)
+            paramObject.addProperty("email", email)
+            paramObject.addProperty("password", passwd)
+
+            Retrofits.getService().signUp(paramObject)
                 .enqueue(object : Callback<JsonObject> {
                     override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                         Toast.makeText(applicationContext, "서버연결을 확인해주세요!", Toast.LENGTH_LONG).show()

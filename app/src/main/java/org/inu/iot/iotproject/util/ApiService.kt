@@ -12,16 +12,12 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    @FormUrlEncoded
+    @Headers("Content-Type: application/json; charset=UTF-8")
     @POST("member/signup")
     abstract fun signUp(
-        @Header("Content-Type") header1 : String,
-        @Field("email") email: String,
-        @Field("name") name: String,
-        @Field("password") password: String): Call<JsonObject>
+        @Body body : JsonObject): Call<JsonObject>
 
     @Headers("Content-Type: application/json; charset=UTF-8")
-//    @Headers("Content-Type: application/x-www-form-urlencoded")
     @POST("member/signin")
     abstract fun signIn(
         @Body body : JsonObject): Call<SignInResponse>
@@ -32,17 +28,11 @@ interface ApiService {
         @Path("id") id : Long
     ) : Call<sterilizersList>
 
-    @FormUrlEncoded
     @Headers("Content-Type: application/json; charset=UTF-8")
     @POST("sterilizer")
     abstract fun insertSterilizer(
         @Header("X-AUTH-TOKEN") userToken : String,
-        @Field("city") city: String,
-        @Field("code") code: String,
-        @Field("position") position: String,
-        @Field("serialNumber") serialNumber: String,
-        @Field("street") street: String)
-            : Call<JsonObject>
+        @Body body : JsonObject): Call<JsonObject>
 
     @DELETE("sterilizer/{sterilizerId}")
     abstract fun deleteSterilizer(

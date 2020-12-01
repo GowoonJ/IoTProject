@@ -38,8 +38,6 @@ class SignInActivity : AppCompatActivity() {
             paramObject.addProperty("email", email)
             paramObject.addProperty("password", passwd)
 
-//            Log.d("signin test", paramObject.toString())
-//            Retrofits.getService().signIn(paramObject)
             Retrofits.getService().signIn(paramObject)
                 .enqueue(object : Callback<SignInResponse> {
                     override fun onFailure(call: Call<SignInResponse>, t: Throwable) {
