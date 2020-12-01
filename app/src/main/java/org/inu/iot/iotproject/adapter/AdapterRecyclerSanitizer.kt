@@ -18,13 +18,17 @@ class AdapterRecyclerSanitizer : RecyclerView.Adapter<AdapterRecyclerSanitizer.V
         notifyDataSetChanged()
     }
 
-    fun setOnItemClickListener(listener: OnItemClickListener?) {
-        mListener = listener
+    interface ItemClickListener {
+        fun onClick(view: View, position: Int)
     }
-    interface OnItemClickListener {
-        fun onItemClick(v: View?, position: Int)
+
+    //클릭리스너 선언
+    private lateinit var itemClickListener: ItemClickListener
+
+    //클릭리스너 등록 매소드
+    fun setItemClickListener(itemClickListener: ItemClickListener) {
+        this.itemClickListener = itemClickListener
     }
-    private var mListener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -53,6 +57,10 @@ class AdapterRecyclerSanitizer : RecyclerView.Adapter<AdapterRecyclerSanitizer.V
             holder.tvRunable.text = "사용 중"
         else
             holder.tvRunable.text = "미사용"
+
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, position)
+        }
     }
 
     class ViewHolder(itemView: View) :
@@ -69,6 +77,4 @@ class AdapterRecyclerSanitizer : RecyclerView.Adapter<AdapterRecyclerSanitizer.V
             tvCapaticy = itemView.findViewById(R.id.tv_capacity)
         }
     }
-
-
 }

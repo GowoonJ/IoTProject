@@ -2,6 +2,7 @@ package org.inu.iot.iotproject.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.JsonObject
@@ -29,7 +30,7 @@ class SignUpActivity : AppCompatActivity() {
             email = editText_Email.text.toString()
             passwd = editText_passwd.text.toString()
 
-            Retrofits.getService().signUp(email, name, passwd)
+            Retrofits.getService().signUp("application/json; charset=UTF-8",email, name, passwd)
                 .enqueue(object : Callback<JsonObject> {
                     override fun onFailure(call: Call<JsonObject>, t: Throwable) {
                         Toast.makeText(applicationContext, "서버연결을 확인해주세요!", Toast.LENGTH_LONG).show()
@@ -37,13 +38,14 @@ class SignUpActivity : AppCompatActivity() {
 
                     override fun onResponse(
                         call: Call<JsonObject>,
-                        response: Response<JsonObject>
-                    ) {
+                        response: Response<JsonObject>) {
                         if (response.isSuccessful && response.code() == 200){
                             Toast.makeText(applicationContext, "가입이 완료되었습니다\n 로그인 해주세요", Toast.LENGTH_LONG).show()
 
                             signUpSuccess = true
                         }
+
+                        Log.d("response code", response.code().toString())
                     }
                 })
 

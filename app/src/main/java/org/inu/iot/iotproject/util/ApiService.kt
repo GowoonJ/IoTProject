@@ -2,29 +2,29 @@ package org.inu.iot.iotproject.util
 
 import com.google.gson.JsonObject
 import okhttp3.ResponseBody
+import org.inu.iot.iotproject.model.SanitizerDetailModel
 import org.inu.iot.iotproject.model.SignInResponse
+import org.inu.iot.iotproject.model.UserRequest
 import org.inu.iot.iotproject.model.sterilizersList
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
 
-    @Headers("Content-Type: application/json")
     @FormUrlEncoded
     @POST("member/signup")
     abstract fun signUp(
-//        @Header("Content-Type") header1 : String,
+        @Header("Content-Type") header1 : String,
         @Field("email") email: String,
         @Field("name") name: String,
         @Field("password") password: String): Call<JsonObject>
 
-    @Headers("Content-Type: application/json")
-    @FormUrlEncoded
+    @Headers("Content-Type: application/json; charset=UTF-8")
     @POST("member/signin")
     abstract fun signIn(
-//        @Header("Content-Type") header1 : String,
-        @Field("email") email: String,
-        @Field("password") password: String): Call<SignInResponse>
+//        @Header("Content-Type") header : String,
+        @Body body : JSONObject): Call<SignInResponse>
 
     @GET("member/{id}")
     abstract fun getUserInfo(
@@ -52,4 +52,9 @@ interface ApiService {
     abstract fun getSterilizers(
         @Header("X-AUTH-TOKEN") userToken : String
     ) : Call<sterilizersList>
+
+    @GET("sterilizer/{sterilizerId}")
+    abstract fun getSterilizer(
+        @Header("X-AUTH-TOKEN") userToken : String,
+        @Path("sterilizerId") sterilizerId : Long) : Call<SanitizerDetailModel>
 }

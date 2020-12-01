@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
     var sList : ArrayList<SanitizerDataModel> = ArrayList<SanitizerDataModel>()
     var enableListCount = 0
 
-    private val userToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiUk9MRV9NRU1CRVIiXSwiaWF0IjoxNjA2Nzk4Njc1LCJleHAiOjE2MDY4MDIyNzV9.8jBscgoSfTSOqm0wmUN4U0koRvKuiRePkfhzDpLdSLQ"
-    val userID = "juwom0831@naver.com"
+    private var userToken = ""
+    var userID = ""
 
     val adapterRecyclerSanitizer : AdapterRecyclerSanitizer = AdapterRecyclerSanitizer()
 
@@ -35,12 +35,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        userToken = intent.extras!!.getString("userToken", "")
-
+        userToken = intent.extras!!.getString("userToken", "")
+        userID = intent.extras!!.getString("userID", "")
 
         textViewName.text = userID+"님"
 
         recyclerView.layoutManager = GridLayoutManager(applicationContext, 2)
+        adapterRecyclerSanitizer.setItemClickListener(object : AdapterRecyclerSanitizer.ItemClickListener{
+            override fun onClick(view: View, position: Int) {
+                val intentDetail = Intent(applicationContext, DetailActivity::class.java)
+                intentDetail.putExtra("userToken", userToken)
+                intentDetail.putExtra("sterilizerId", sList[position].id)
+//            intentDetail.putExtra("userID", email)
+                startActivity(intentDetail)
+                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
+            }
+        })
 
         floatingActionButton.setOnClickListener {
             dataLoaded = false
