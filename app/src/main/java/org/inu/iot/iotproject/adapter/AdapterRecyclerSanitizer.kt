@@ -69,14 +69,12 @@ class AdapterRecyclerSanitizer : RecyclerView.Adapter<AdapterRecyclerSanitizer.V
     class ViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         var tvName: TextView
-        var tvLocation: TextView
         var tvRunable: TextView
         var tvCapaticy: TextView
         var progressBar : ProgressBar
 
         init {
             tvName = itemView.findViewById(R.id.tv_name)
-            tvLocation = itemView.findViewById(R.id.tv_location)
             tvRunable = itemView.findViewById(R.id.tv_runable)
             tvCapaticy = itemView.findViewById(R.id.tv_capacity)
             progressBar = itemView.findViewById(R.id.progressBar)

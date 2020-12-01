@@ -38,12 +38,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_top"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.05" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_left"
@@ -67,8 +61,9 @@
                 android:textColor="#000"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:layout_marginTop="24dp"
                 app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toBottomOf="@id/guideline_top" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:id="@+id/divider2"
@@ -133,13 +128,12 @@
                 android:id="@+id/progressBar_Capacity"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginHorizontal="8dp"
                 android:background="@drawable/rounded_rectangle_outline_11dp"
                 android:progressDrawable="@drawable/progressbar_background"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-                app:layout_constraintHeight_percent="0.05"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left"
                 app:layout_constraintTop_toBottomOf="@+id/tv_location_info" />
 

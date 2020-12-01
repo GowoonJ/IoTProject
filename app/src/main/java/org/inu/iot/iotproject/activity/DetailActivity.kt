@@ -110,8 +110,8 @@ class DetailActivity : AppCompatActivity() {
         val percent = sanitizerData.disinfectant.currentCapacity/sanitizerData.disinfectant.totalCapacity*100
 
         progressBar_Capacity.progress = percent
-        tv_Capacity_left.text = "현재 잔여량 : " + percent + "%"
-//        tv_Capacity_left.text = "현재 잔여량 : " + sanitizerData.disinfectant.percent.toString() + "%"
+        progressBar_Capacity.rotation = 180F
+        tv_Capacity_left.text = "현재 잔여량 : " + sanitizerData.disinfectant.percent.toString() + "%"
         tv_totalCapacity.text = "총량 : "+ sanitizerData.disinfectant.totalCapacity + " 잔여량 : " + sanitizerData.disinfectant.currentCapacity
     }
 
