@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
     var sList : ArrayList<SanitizerDataModel> = ArrayList<SanitizerDataModel>()
     var enableListCount = 0
 
-    private var userToken = ""
-    var userID = ""
+    private var userToken = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwicm9sZXMiOlsiUk9MRV9NRU1CRVIiXSwiaWF0IjoxNjA2ODEyMzY5LCJleHAiOjE2MDY4MTU5Njl9.FjTmhjy45a7ljXRzOYzM3fUu3nmbiSK3MiNUakro2gw"
+    var userID = "jgw971229@naver.com"
 
     val adapterRecyclerSanitizer : AdapterRecyclerSanitizer = AdapterRecyclerSanitizer()
 
@@ -35,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        userToken = intent.extras!!.getString("userToken", "")
-        userID = intent.extras!!.getString("userID", "")
+//        userToken = intent.extras!!.getString("userToken", "")
+//        userID = intent.extras!!.getString("userID", "")
 
         textViewName.text = userID+"님"
 

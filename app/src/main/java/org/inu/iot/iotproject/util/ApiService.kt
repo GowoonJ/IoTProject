@@ -20,10 +20,10 @@ interface ApiService {
         @Field("name") name: String,
         @Field("password") password: String): Call<JsonObject>
 
-    @Headers("Content-Type: application/json; charset=UTF-8")
+//    @Headers("Content-Type: application/json; charset=UTF-8")
+    @Headers("Content-Type: application/x-www-form-urlencoded")
     @POST("member/signin")
     abstract fun signIn(
-//        @Header("Content-Type") header : String,
         @Body body : JSONObject): Call<SignInResponse>
 
     @GET("member/{id}")
@@ -33,8 +33,10 @@ interface ApiService {
     ) : Call<sterilizersList>
 
     @FormUrlEncoded
+    @Headers("Content-Type: application/json; charset=UTF-8")
     @POST("sterilizer")
     abstract fun insertSterilizer(
+        @Header("X-AUTH-TOKEN") userToken : String,
         @Field("city") city: String,
         @Field("code") code: String,
         @Field("position") position: String,
