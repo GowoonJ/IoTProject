@@ -31,10 +31,10 @@ class SignInActivity : AppCompatActivity() {
         var signInSuccess = false
 
         btn_sign_in.setOnClickListener {
-//            email = editText_Email.text.toString()
-//            passwd = editText_passwd.text.toString()
-            email = "juwom0831@naver.com"
-            passwd = "rjatjd0815*"
+            email = editText_Email.text.toString()
+            passwd = editText_passwd.text.toString()
+//            email = "juwom0831@naver.com"
+//            passwd = "rjatjd0815*"
 
             val paramObject = JsonObject()
             paramObject.addProperty("email", email)

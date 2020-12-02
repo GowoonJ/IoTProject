@@ -1,6 +1,7 @@
 package org.inu.iot.iotproject.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -36,7 +37,11 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
 
         btn_select_usedHistory.setOnClickListener {
-
+            val intentChart = Intent(applicationContext, ChartActivity::class.java)
+            intentChart.putExtra("userToken", userToken)
+            intentChart.putExtra("sterilizerId", sanitizerId)
+            startActivity(intentChart)
+            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
         }
     }
 
@@ -107,9 +112,7 @@ class DetailActivity : AppCompatActivity() {
         tv_locationCity.text = sanitizerData.address.city
         tv_locationDetail.text = sanitizerData.address.position
 
-        val percent = sanitizerData.disinfectant.currentCapacity/sanitizerData.disinfectant.totalCapacity*100
-
-        progressBar_Capacity.progress = percent
+        progressBar_Capacity.progress = sanitizerData.disinfectant.percent
         progressBar_Capacity.rotation = 180F
         tv_Capacity_left.text = "현재 잔여량 : " + sanitizerData.disinfectant.percent.toString() + "%"
         tv_totalCapacity.text = "총량 : "+ sanitizerData.disinfectant.totalCapacity + " 잔여량 : " + sanitizerData.disinfectant.currentCapacity

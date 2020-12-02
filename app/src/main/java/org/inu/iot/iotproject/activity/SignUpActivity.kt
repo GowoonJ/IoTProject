@@ -47,19 +47,16 @@ class SignUpActivity : AppCompatActivity() {
                         if (response.isSuccessful && response.code() == 200){
                             Toast.makeText(applicationContext, "가입이 완료되었습니다\n 로그인 해주세요", Toast.LENGTH_LONG).show()
 
-                            signUpSuccess = true
+                            val intentSignIn = Intent(applicationContext, SignInActivity::class.java)
+                            startActivity(intentSignIn)
+                            overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
+                            finish()
                         }
 
                         Log.d("response code", response.code().toString())
                     }
                 })
 
-            if(signUpSuccess){
-                val intentSignIn = Intent(this, SignInActivity::class.java)
-                this.startActivity(intentSignIn)
-                overridePendingTransition(R.anim.enter_from_right, R.anim.exit_to_left)
-                this.finish()
-            }
         }
     }
 }

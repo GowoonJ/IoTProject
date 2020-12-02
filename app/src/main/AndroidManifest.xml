@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.inu.iot.iotproject">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,14 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IoTProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.AddActivity"></activity>
+        <activity android:name=".activity.ChartActivity"></activity>
+        <activity android:name=".activity.AddActivity" />
         <activity android:name=".activity.DetailActivity" />
         <activity android:name=".activity.SignInActivity" />
-        <activity android:name=".activity.MainActivity">
-
-        </activity>
+        <activity android:name=".activity.MainActivity"></activity>
         <activity android:name=".activity.SplashActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -193,7 +193,7 @@
         android:layout_marginBottom="24dp"
         android:text="일자별 사용량 보기"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:backgroundTint="@color/colorMain"
         android:background="@drawable/rounded_rectangle_outline_11dp"
         app:layout_constraintBottom_toBottomOf="parent" />
